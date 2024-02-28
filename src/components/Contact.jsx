@@ -1,8 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
 import Contactslist from './Contactslist';
+import inputs from '../contants/input';
+
+
 function Contact() {
   const [contacts,setContacts]=useState([]);
+  const [alert,setAlert]=useState("");
   const [contact,setContact]=useState({
     name: "",
     lastName: "",
@@ -17,6 +21,14 @@ function Contact() {
   };
 
   const addHandler=()=> {
+    if(!contact.name || !contact.lastName || !contact.email || !contact.phone){
+       
+        setAlert("please enter valid data!");
+       return;
+       
+    }else{
+      setAlert("");
+    }
     setContacts((contacts) => ([...contacts,contact]));
     setContact({
       name: "",
@@ -31,32 +43,22 @@ function Contact() {
   return (
     <div>
         <div>
-         <input type="text"
-          placeholder="Name"
-          name="name"
-           value={contact.name}
-            onChange={changeHandler}/>
+          {
+            inputs.map((input,index) => (<input
+             key={index}
+             type={input.type} 
+             placeholder={input.placeholder}
+             name={input.name}
+             value={contact[input.name]}
+             onChange={changeHandler}
+             />)
 
-         <input type="text"
-          placeholder="Last Name"
-          name="lastName"
-           value={contact.lastName}
-            onChange={changeHandler}/>
-
-         <input type="email"
-          placeholder="Email"
-          name="email"
-           value={contact.email}
-            onChange={changeHandler}/>
-
-         <input type="number"
-          placeholder="Phone"
-           value={contact.phone}
-           name="phone"
-            onChange={changeHandler}/>
-
+            )
+          }
+        
          <button onClick={addHandler}>Add Contact</button>
         </div>
+        <div>{alert && <p>{alert}</p>}</div>
         <Contactslist contacts={contacts}/>
     </div>
   )

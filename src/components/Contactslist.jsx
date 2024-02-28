@@ -1,9 +1,15 @@
 
-function Contactslist(props) {
-    console.log(props)
+function Contactslist({contacts}) {
+
   return (
-    <div></div>
+    <div><h3> 
+      <ul>
+        {contacts.map((contact) => <li>{contact.name}</li>)}
+      </ul>
+      </h3></div>
+  
+     
   )
 }
 
-export default Contactslist
+export default Contactslist;
