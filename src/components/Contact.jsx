@@ -2,12 +2,14 @@ import React from 'react'
 import { useState } from 'react';
 import Contactslist from './Contactslist';
 import inputs from '../contants/input';
+import { v4 } from 'uuid';
 
 
 function Contact() {
   const [contacts,setContacts]=useState([]);
   const [alert,setAlert]=useState("");
   const [contact,setContact]=useState({
+    id: "",
     name: "",
     lastName: "",
     email: "",
@@ -26,16 +28,15 @@ function Contact() {
         setAlert("please enter valid data!");
        return;
        
-    }else{
-      setAlert("");
     }
-    setContacts((contacts) => ([...contacts,contact]));
+      setAlert("");
+      const newContact={...contact,id: v4()}
+    setContacts((contacts) => ([...contacts,newContact]));
     setContact({
       name: "",
       lastName: "",
       email: "",
       phone: "",
-
     })
     console.log(contacts);
   }
