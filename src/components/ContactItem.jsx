@@ -1,13 +1,13 @@
 
 import Contactslist from './Contactslist'
-function ContactItem(props) {
-    console.log(props);
+function ContactItem({data:{id,name,lastName,email,phone},deleteHandler}) {
+   
   return (
-    <li key={props.data.id}>
-          <p>{props.data.name} {props.data.lastName}</p>
-          <p><span>🖨</span>{props.data.email}</p>
-          <p><span>☎</span>{props.data.phone}</p>
-          <button>🛒</button>
+    <li key={id}>
+          <p>{name} {lastName}</p>
+          <p><span>🖨</span>{email}</p>
+          <p><span>☎</span>{phone}</p>
+          <button onClick={()=> deleteHandler(id)}>🛒</button>
            </li>
   )
 }

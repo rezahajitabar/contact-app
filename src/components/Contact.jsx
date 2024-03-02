@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Contactslist from './Contactslist';
 import inputs from '../contants/input';
 import { v4 } from 'uuid';
+import styles from "./Contacts.module.css";
 
 
 function Contact() {
@@ -38,12 +39,19 @@ function Contact() {
       email: "",
       phone: "",
     })
-    console.log(contacts);
+   
+  };
+
+  const deleteHandler=id => {
+    const newContacts=contacts.filter(contact => contact.id !==id);
+    setContacts(newContacts);
+       
+    
   }
 
   return (
-    <div>
-        <div>
+    <div className={styles.container}>
+        <div className={styles.form}>
           {
             inputs.map((input,index) => (<input
              key={index}
@@ -59,8 +67,8 @@ function Contact() {
         
          <button onClick={addHandler}>Add Contact</button>
         </div>
-        <div>{alert && <p>{alert}</p>}</div>
-        <Contactslist contacts={contacts}/>
+        <div className={styles.alert}>{alert && <p>{alert}</p>}</div>
+        <Contactslist contacts={contacts} deleteHandler={deleteHandler}/>
     </div>
   )
 }
