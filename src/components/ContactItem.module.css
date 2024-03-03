@@ -25,3 +25,17 @@
     line-height: 35px;
     border-radius: 50%;
 }
+
+.item button{
+    width: 35px;
+    height: 35px;
+    background-color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s all ease-in-out;
+}
+
+.item button:hover{
+    font-size: 1.5rem;
+}
